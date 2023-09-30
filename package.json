@@ -1,0 +1,39 @@
+{
+  "name": "@kaadon.com/httpserver",
+  "version": "0.0.1",
+  "description": "kaadon.com's plugins httpserver",
+  "keywords": [
+    "kaadon",
+    "plugins",
+    "httpserver"
+  ],
+  "main": "httpserver/index.js",
+  "author": "kaadon.com",
+  "license": "MIT",
+  "scripts": {
+    "build": "babel src --out-dir httpserver"
+  },
+  "files": [
+    "/httpserver"
+  ],
+  "dependencies": {
+    "@hapi/hapi": "^21.3.2",
+    "qs": "^6.11.2",
+    "socket.io": "^4.7.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kaadon/npm_plugins_httpServer.git"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7",
+    "@babel/core": "^7",
+    "@babel/generator": "^7",
+    "@babel/parser": "^7",
+    "@babel/preset-env": "^7",
+    "dotenv": "^16.3.1"
+  }
+}
