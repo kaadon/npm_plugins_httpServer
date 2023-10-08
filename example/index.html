@@ -1,0 +1,51 @@
+<!-- 消息列表 -->
+<ul id="messages"></ul>
+<!-- 发送消息的表单 -->
+<form id="form" action="">
+    <input id="input" autocomplete="off"/>
+    <button>Send</button>
+</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.3/socket.io.min.js"
+        integrity="sha512-GtM/5c/Ie0lStj6QwEG0HkpMQuGr9vrOAgFD4nNmImviyZvsJxN7TYU7b+R7Kthob0zFBUpuxfl3R3Mn1qekTw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    const socket = io('ws://127.0.0.1:4501', {
+        auth: {
+            token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJpc3MiOiJib29sYWRtaW4iLCJpYXQiOjE2NzU0MTE3MDIsImV4cCI6MTY3NjAxNjUwMiwiZGF0YSI6eyJ0eXBlIjoiY3VzdG9tZXIiLCJpZCI6Mzg5OTA5OCwiYWdlbnRfbGluZSI6IjB8OTg2MTl8OTg2MjB8IiwiYW5hbG9nIjowLCJ1dWlkIjoiWElLd1BkV21zVCIsIm1pZCI6Mzg5OTA5OCwiaWRlbnRpZmljYXRpb24iOiJYSUt3UGRXbXNUIiwiaXAiOiIyNy4xMDIuMTE1LjI0IiwidXNlcl9hZ2VudCI6IjUxMzBjZDM1ZTYxNzNmYTg5ZGNhYTkwYzgxYjQ5YTY5YzY1OGJkNzgifX0.gXY8sL8HkNGvS9-0O0ftxMFH_jFsycpNhpVAuBmP62pBmNEsZBoiTuFrO2GS140lCBWF_yWpu8XcoxDb8Tt48hWFVsGfHfUI0tp_t3mr-mvUeXrZwusxD7tyxoahwQssB8cRuzSJyDxmb77GpaMVZCkLjL8mP4lGq6BwujdhoC_YYlo5C4TQju2biL2r5VKi9ND4h2-NohW1BkT19lpcKCOPbMWQzfsffoC_3dzqJvNIKlir4hAW-EWN49kvvWJqXk2c0GP-zmRBFkSd3Okkr03icJy6Pwp-9ut867GebYJ2jGt2SP_o-Eve4g-p_EjNVqFi8twfeZ1_YY7JaVOLOBECybLtch8nxohUSSYaAm4STchFQVWHoHQi-2VXt30PHl59ieogz9IXZIdk2h4qz8hja4A8sMVHZtTPoviwu4O3P4IEN7n4GVwAIa__mxSgPKv03dfybO8mONb9WltVD85aURRjcAxyZb_Flw-HW-8mfNOvfbLkG1FZr5FbcLeLbyhv1QunmhoXetbuV1wBO_Dry9aRe9z1GV_XWpIcEcepHbx9AH8PGHSaWD0YUrVM5M4BjcbuhdlAduQ9BnYHmzAI3-N-5MNpcXUDsStPHuH2vJzYlrk6bhCao6RP3GdS9cfsfCuXRZVbwtTDhXRjUUX8DiRpCCUrAcDYV1Z6t48"
+        },
+        query: {
+            "ss": "ss"
+        }
+    })
+    socket.on('connect', () => {
+        console.log('客户端连接成功')
+    })
+    socket.on('recive', console.log)
+    socket.on('kline', console.log)
+    socket.emit('getPush', JSON.stringify({
+                                              "type": "BuyStatus",
+                                              "sub": "1@15m"
+                                          }))
+    setInterval(() => {
+        socket.emit('getPush', JSON.stringify({
+            "type": "History",
+            "sub": "btcusdt@1m",
+            "count": 500
+        }))
+        socket.emit('getPush', JSON.stringify({
+            "type": "BuyStatus",
+            "sub": "1@15m"
+        }))
+    }, 1000)
+    socket.on('disconnect', reason => {
+        if (reason === 'io server disconnect') {
+            console.log('服务器断开连接，手动尝试重连')
+            socket.connect()
+        } else {
+            console.log('连接断开')
+        }
+    })
+    socket.on('connect_error', () => {
+        console.log('连接失败')
+    })
+</script>

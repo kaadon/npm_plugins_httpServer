@@ -1,17 +1,20 @@
 {
   "name": "@kaadon.com/httpserver",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "kaadon.com's plugins httpserver",
   "keywords": [
     "kaadon",
     "plugins",
-    "httpserver"
+    "httpserver",
+    "hapi",
+    "socket.io"
   ],
   "main": "httpserver/index.js",
   "author": "kaadon.com",
   "license": "MIT",
   "scripts": {
-    "build": "babel src --out-dir httpserver"
+    "build": "babel src --out-dir httpserver",
+    "test": "yarn build && babel example --out-dir test"
   },
   "files": [
     "/httpserver"
