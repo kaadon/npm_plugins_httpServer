@@ -28,7 +28,7 @@ class HapiInitClass {
                 }
             }
         })
-        this.setRoute(routes)
+        if (routes !== {}) this.setRoute(routes);
     }
 
     setRoute(routes){
