@@ -20,23 +20,6 @@
     socket.on('connect', () => {
         console.log('客户端连接成功')
     })
-    socket.on('recive', console.log)
-    socket.on('kline', console.log)
-    socket.emit('getPush', JSON.stringify({
-                                              "type": "BuyStatus",
-                                              "sub": "1@15m"
-                                          }))
-    setInterval(() => {
-        socket.emit('getPush', JSON.stringify({
-            "type": "History",
-            "sub": "btcusdt@1m",
-            "count": 500
-        }))
-        socket.emit('getPush', JSON.stringify({
-            "type": "BuyStatus",
-            "sub": "1@15m"
-        }))
-    }, 1000)
     socket.on('disconnect', reason => {
         if (reason === 'io server disconnect') {
             console.log('服务器断开连接，手动尝试重连')
