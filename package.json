@@ -1,6 +1,6 @@
 {
   "name": "@kaadon.com/httpserver",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "kaadon.com's plugins httpserver",
   "keywords": [
     "kaadon",
@@ -14,7 +14,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --out-dir httpserver",
-    "test": "yarn build && babel example --out-dir test"
+    "publish": "yarn build ; npm publish "
   },
   "files": [
     "/httpserver"

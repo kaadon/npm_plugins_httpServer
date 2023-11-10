@@ -36,6 +36,10 @@ class HapiInitClass {
         return this
     }
 
+    registerModule(module){
+        this.serverClient.register(module)
+        return this
+    }
     init(){
         let that = this
         return new Promise((resolve, reject) => {
